@@ -13,7 +13,7 @@ interface IProducts {
 const products: IProducts[] = [
     {id: 1, Title: 'Laptop', Description: 'High performance laptop', Price: 1000.0},
     {id: 2, Title: 'Smartphone', Description: 'Latest model smartphone', Price: 800.0},
-    {id: 3, Title: 'Tablet', Description: 'Portable tablet', Price: 500.0},
+    {id: 3, Title: 'Tablet', Description: 'Portable tablet', Price: 500000.0},
     {id: 4, Title: 'Smartwatch', Description: 'Smartwatch with various features', Price: 300.0},
     {id: 5, Title: 'Camera', Description: 'High resolution camera', Price: 700.0},
     {id: 6, Title: 'Headphones', Description: 'Noise cancelling headphones', Price: 200.0},
@@ -38,14 +38,16 @@ const HomePage = () => {
                 <h2>Новые товары</h2>
                 <div className="NewProductsStripe">
                     {products.slice(0, Math.min(5, products.length)).map((product) => (
-                        <div key={product.id} className="NewProductCard">
-                            {/* <div className="CardImage"> */}
+                        <Link to={`${product.id}`} key={product.id}>
+                            <div className="NewProductCard">
                                 <img src='https://c.dns-shop.ru/thumb/st4/fit/500/500/0bab69bd071c5b93d6554558e81f9da6/d212b8b4d0f4fc5727cceb252eec43e085375d95ec5af2d541464a7af06f3bad.jpg.webp' alt={product.Title} />
-                            {/* </div> */}
-                            <h3>{product.Title}</h3>
-                            <p>{product.Description}</p>
-                            <h4>{product.Price}</h4>
-                        </div>
+                                <h3>{product.Title}</h3>
+                                <h4>{product.Price}</h4>
+                                <button onClick={(e) => {e.preventDefault()}}>
+                                    <img src={require('../images/add-to-cart.png')} />
+                                </button>
+                            </div>
+                        </Link>
                     ))}
                     <Link to='/More'>
                         <div className="More">
