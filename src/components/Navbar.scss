@@ -1,0 +1,73 @@
+.NAVBAR {
+    width: 100%;
+    height: 4em;
+    top: 0;
+    position: fixed;
+    // display: flex;
+    // flex-direction: row;
+    // border-radius: 0.4em;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    // backdrop-filter: blur(0.1em);
+    background-color: white;
+    border-bottom: solid 0.2em #2c3949;
+    // background-color: rgba(aqua, 0.1);
+    z-index: 10;
+
+    a {
+        text-decoration: none;
+
+        .Logo {
+            padding-left: 0.4em;
+            margin-left: 0.5em;
+            width: 10em;
+            height: 4em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            // background-color: red;
+    
+            > img {
+                width: 4em;
+                height: 4em;
+    
+            }
+    
+            > label {
+                width: 50%;
+                color: #2c3949;
+                font-size: 1.1em;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .SearchBar {
+        box-sizing: border-box;
+        
+        > input {
+            padding-left: 0.5em;
+            font-family: Verdana, Times, serif;
+            font-size: 1em;
+            font-weight: bold;
+            width: 95%;
+            height: 2.25em;
+            border: none;
+            border-radius: 0.2em;
+            background-color: rgba(#2c4050, 0.25);
+        }
+    }
+
+    a {
+        .Account {
+            padding: 0 0.5em;
+
+            > img {
+                width: 2.5em;
+                filter: invert(21%) sepia(3%) saturate(6595%) hue-rotate(165deg) brightness(91%) contrast(86%);
+            }
+        }  
+    }
+}
