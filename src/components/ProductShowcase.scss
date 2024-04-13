@@ -1,0 +1,183 @@
+.ProductShowcaseComponent {
+    position: relative;
+
+    .TabLabel {
+
+        > button {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 0.25em solid transparent;
+            border-radius: 0.1em;
+            padding: 0.2em 0.4em;
+            font-size: 1.4em;
+            background-color: rgba(#2c4050, 0.2);
+            transition: all 0.1s ease-in-out;
+        }
+        > button:not(:first-of-type) {
+            margin-left: 0.5em;
+        }
+        .ActiveTab {
+            font-weight: bold;
+            border-bottom: 0.25em solid #2c4050;
+        }
+        .InactiveTab:hover {
+            cursor: pointer;
+            background-color: rgba(#2c4050, 0.1);
+        }
+    }
+
+    > button {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4em;
+        height: 4em;
+        position: absolute;
+        color: white;
+        border: none;
+        border-radius: 0.5em;
+        background-color: rgba(#2c4050, 1);
+        opacity: 0.8;
+    }
+    > .leftBtn {
+        left: -1em;
+    }
+    > .rightBtn {
+        right: -1em;
+    }
+    > button:hover {
+        opacity: 1;
+    }
+
+    .TabContent {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0.5em;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+
+        > a {
+            margin: 0 0.5em;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            text-decoration: none;
+
+            .ProductCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;          
+                width: 14em;
+                margin: 0.5em 0;
+                color: black;
+                padding: 0.5em;
+                border-radius: 0.4em;
+                scroll-snap-align: center;
+                background-color: rgba(#2c4050, 0.2);
+
+                > img {
+                    width: 100%;
+                    border-radius: 0.3em;
+                }
+
+                > h3 {
+                    margin: 0.2em 0;
+                }
+
+                .RatingReviews {
+                    display: flex;
+                    justify-content: space-between;
+
+                    p {
+                        margin: 0.5em 0;
+                    }
+
+                    > div {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        > img {
+                            width: 1em;
+                            height: 1em;
+                            filter: invert(19%) sepia(67%) saturate(313%) hue-rotate(164deg) brightness(93%) contrast(87%);
+                        }
+
+                        > p {
+                            margin-left: 0.25em;
+                        }
+                    }
+                }
+
+                > h2 {
+                    font-size: 1.8em;
+                    margin: 0;
+                    padding: 0.25em 0.5em 0.5em 0;
+                    text-align: end;
+                }
+                
+                .ProductCardButtons {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5em;
+
+                    > button {
+                        height: 3.5em;
+                        border-radius: 0.2em;
+                        border: none;
+                        background-color: rgba(#2c4050, 0.8);
+                        transition: all 0.1s ease-in-out;
+                        cursor: pointer;
+              
+                        > img {
+                          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+                        }
+                    }
+                    > button:first-of-type {
+                        width: 100%;
+
+                        > img {
+                            width: 2.5em;
+                        }
+                    }
+                    > button:last-of-type {
+                        width: 5em;
+
+                        > img {
+                            width: 2em;
+                        }
+                    }
+                    > button:hover {
+                        filter: brightness(150%);
+                    }
+                }
+            }
+            .ProductCard:hover {
+                box-shadow: 0 0 0.25em 0.2em rgba(#2c4050, 0.6);
+            }
+        }
+    }
+    .TabContent::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    > div {
+
+        > a {
+
+            > button {
+                font-weight: bold;
+                width: 100%;
+                border-radius: 0.2em;
+                font-size: 1.2em;
+                letter-spacing: 0.05em;
+                height: 1.75em;
+                border: 0.15em solid #2c4050;
+                background-color: rgba(#2c4050, 0.1);
+                cursor: pointer;
+            }
+        }
+    }
+}
