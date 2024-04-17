@@ -101,19 +101,31 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
                     </button>
                 ))}
             </div>
-            {!isAtStart && (
-            <button className='leftBtn' onClick={() => {
-                if (tabRefs[activeTab].current) {
-                    tabRefs[activeTab].current!.scrollTo({
-                        left: tabRefs[activeTab].current!.scrollLeft - 550,
-                        behavior: 'smooth'
-                    });
-                }
-            }}>&lt;</button>
-            )}
             {tabs.map((tab, index) => (
                 <div key={index} style={{ display: activeTab === index ? 'block' : 'none' }}>
-                    <Tab ref={tabRefs[index]} data={tab.data} label={tab.label} url={tab.url} />
+                    <div className={`TapeField ${isAtStart ? 'at-start' : ''} ${isAtEnd ? 'at-end' : ''}`}>
+                        {!isAtStart && (
+                            <button className='leftBtn' onClick={() => {
+                                if (tabRefs[activeTab].current) {
+                                    tabRefs[activeTab].current!.scrollTo({
+                                        left: tabRefs[activeTab].current!.scrollLeft - 550,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }}>&lt;</button>
+                        )}
+                        <Tab ref={tabRefs[index]} data={tab.data} label={tab.label} url={tab.url} />
+                        {!isAtEnd && (
+                            <button className='rightBtn' onClick={() => {
+                                if (tabRefs[activeTab].current) {
+                                    tabRefs[activeTab].current!.scrollTo({
+                                        left: tabRefs[activeTab].current!.scrollLeft + 550,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }}>&gt;</button>
+                        )}
+                    </div>
                     <Link to={`${tab.url}`}>
                         <button>
                             Больше товаров данной категории
@@ -121,16 +133,6 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
                     </Link>
                 </div>
             ))}
-            {!isAtEnd && (
-                <button className='rightBtn' onClick={() => {
-                    if (tabRefs[activeTab].current) {
-                        tabRefs[activeTab].current!.scrollTo({
-                            left: tabRefs[activeTab].current!.scrollLeft + 550,
-                            behavior: 'smooth'
-                        });
-                    }
-                }}>&gt;</button>
-            )}
         </div>
     );
 };

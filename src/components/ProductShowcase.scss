@@ -1,10 +1,11 @@
 .ProductShowcaseComponent {
+    width: 100%;
     position: relative;
 
     .TabLabel {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-flow: wrap;
         gap: 0.4em;
 
         > button {
@@ -28,147 +29,183 @@
         }
     }
 
-    > button {
-        top: 52%;
-        transform: translateY(-50%);
-        width: 4em;
-        height: 4em;
-        position: absolute;
-        color: white;
-        border: none;
-        border-radius: 0.5em;
-        background-color: rgba(#2c4050, 1);
-        opacity: 0.8;
-        transition: all 25ms ease-in-out;
-        z-index: 10;
-    }
-    > .leftBtn {
-        left: -1em;
-    }
-    > .rightBtn {
-        right: -1em;
-    }
-    > button:hover {
-        opacity: 1;
-    }
-
-    .TabContent {
+    .TapeField {
         position: relative;
-        border-radius: 1.5em;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        gap: 0.5em;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
 
-        > a {
-            margin: 0 0.5em;
+        > button {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4em;
+            height: 4em;
+            position: absolute;
+            color: white;
+            border: none;
+            border-radius: 0.5em;
+            background-color: rgba(#2c4050, 1);
+            opacity: 0.8;
+            transition: all 25ms ease-in-out;
+            z-index: 10;
+        }
+        > .leftBtn {
+            left: -1em;
+        }
+        > .rightBtn {
+            right: -1em;
+        }
+        > button:hover {
+            opacity: 1;
+        }
+
+        .TabContent {
+            position: relative;
+            border-radius: 1.5em;
             display: flex;
             flex-direction: row;
             align-items: stretch;
-            text-decoration: none;
+            gap: 0.5em;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
 
-            .ProductCard {
+            > a {
+                margin: 0 0.5em;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;          
-                width: 13.5em;
-                margin: 0.5em 0;
-                color: black;
-                padding: 0.5em;
-                border-radius: 0.4em;
-                scroll-snap-align: center;
-                background-color: rgba(#2c4050, 0.2);
-
-                > img {
-                    width: 100%;
-                    border-radius: 0.3em;
-                }
-
-                > h3 {
-                    font-size: 1.1em;
-                    margin: 0.2em 0;
-                }
-
-                .RatingReviews {
+                flex-direction: row;
+                align-items: stretch;
+                text-decoration: none;
+    
+                .ProductCard {
                     display: flex;
-                    justify-content: space-between;
-
-                    p {
-                        margin: 0.5em 0;
+                    flex-direction: column;
+                    justify-content: space-between;          
+                    width: 13.5em;
+                    margin: 0.5em 0;
+                    color: black;
+                    padding: 0.5em;
+                    border-radius: 0.4em;
+                    scroll-snap-align: center;
+                    background-color: rgba(#2c4050, 0.2);
+    
+                    > img {
+                        width: 100%;
+                        border-radius: 0.3em;
                     }
-
-                    > div {
+    
+                    > h3 {
+                        font-size: 1.1em;
+                        margin: 0.2em 0;
+                    }
+    
+                    .RatingReviews {
+                        display: flex;
+                        justify-content: space-between;
+    
+                        p {
+                            margin: 0.5em 0;
+                        }
+    
+                        > div {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+    
+                            > img {
+                                width: 1em;
+                                height: 1em;
+                                filter: invert(19%) sepia(67%) saturate(313%) hue-rotate(164deg) brightness(93%) contrast(87%);
+                            }
+    
+                            > p {
+                                margin-left: 0.25em;
+                            }
+                        }
+                    }
+    
+                    > h2 {
+                        font-size: 1.6em;
+                        margin: 0;
+                        padding: 0.25em 0.5em 0.5em 0;
+                        text-align: end;
+                    }
+                    
+                    .ProductCardButtons {
                         display: flex;
                         flex-direction: row;
-                        align-items: center;
-
-                        > img {
-                            width: 1em;
-                            height: 1em;
-                            filter: invert(19%) sepia(67%) saturate(313%) hue-rotate(164deg) brightness(93%) contrast(87%);
+                        gap: 0.5em;
+    
+                        > button {
+                            height: 3.5em;
+                            border-radius: 0.2em;
+                            border: none;
+                            background-color: rgba(#2c4050, 0.8);
+                            transition: all 0.1s ease-in-out;
+                            cursor: pointer;
+                  
+                            > img {
+                              filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+                            }
                         }
-
-                        > p {
-                            margin-left: 0.25em;
+                        > button:first-of-type {
+                            width: 100%;
+    
+                            > img {
+                                width: 2.5em;
+                            }
+                        }
+                        > button:last-of-type {
+                            width: 5em;
+    
+                            > img {
+                                width: 2em;
+                            }
+                        }
+                        > button:hover {
+                            filter: brightness(150%);
                         }
                     }
                 }
-
-                > h2 {
-                    font-size: 1.6em;
-                    margin: 0;
-                    padding: 0.25em 0.5em 0.5em 0;
-                    text-align: end;
+                .ProductCard:hover {
+                    box-shadow: 0 0 0.25em 0.2em rgba(#2c4050, 0.6);
                 }
-                
-                .ProductCardButtons {
-                    display: flex;
-                    flex-direction: row;
-                    gap: 0.5em;
-
-                    > button {
-                        height: 3.5em;
-                        border-radius: 0.2em;
-                        border: none;
-                        background-color: rgba(#2c4050, 0.8);
-                        transition: all 0.1s ease-in-out;
-                        cursor: pointer;
-              
-                        > img {
-                          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-                        }
-                    }
-                    > button:first-of-type {
-                        width: 100%;
-
-                        > img {
-                            width: 2.5em;
-                        }
-                    }
-                    > button:last-of-type {
-                        width: 5em;
-
-                        > img {
-                            width: 2em;
-                        }
-                    }
-                    > button:hover {
-                        filter: brightness(150%);
-                    }
-                }
-            }
-            .ProductCard:hover {
-                box-shadow: 0 0 0.25em 0.2em rgba(#2c4050, 0.6);
             }
         }
+        .TabContent::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
     }
-    .TabContent::-webkit-scrollbar {
-        width: 0;
-        height: 0;
+    .TapeField::before {
+        content: "";
+        border-top-left-radius: 0.8em;
+        border-bottom-left-radius: 0.8em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 5em;
+        background: linear-gradient(to right, rgba(black, 0.4), transparent);
+        box-shadow: inset 0 0 100px transparent;
+        transform: scaleY(0.97);
     }
+    .TapeField.at-start::before {
+        display: none;
+    }
+    .TapeField::after {
+        content: "";
+        border-top-right-radius: 0.8em;
+        border-bottom-right-radius: 0.8em;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 5em;
+        background: linear-gradient(to left, rgba(black, 0.4), transparent);
+        box-shadow: inset 0 0 100px transparent;
+        transform: scaleY(0.97);
+    }
+    .TapeField.at-end::after {
+        display: none;
+    }
+
     > div {
 
         > a {
