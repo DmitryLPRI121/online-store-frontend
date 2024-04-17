@@ -13,6 +13,7 @@ interface IProducts {
 interface TabProps {
     data: IProducts[];
     label: string;
+    url: string;
 }
 
 interface TabsProps {
@@ -31,10 +32,10 @@ function getReviewWord(reviews: number) {
     return text;
 }
 
-const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data }, ref) => (
+const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
     <div ref={ref} className='TabContent'>
         {data.map((item) => (
-            <Link to={`${item.id}`} key={item.id}>
+            <Link to={`${url}/${item.id}`} key={item.id}>
                 <div className='ProductCard'>
                     <img src='https://c.dns-shop.ru/thumb/st4/fit/500/500/0bab69bd071c5b93d6554558e81f9da6/d212b8b4d0f4fc5727cceb252eec43e085375d95ec5af2d541464a7af06f3bad.jpg.webp' alt={item.Title} />
                     <h3>{item.Title}</h3>
@@ -45,7 +46,7 @@ const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data }, ref) => (
                         </div>
                         <p>{item.Reviews} {getReviewWord(item.Reviews)}</p>
                     </div>
-                    <h2>{item.Price} ₽</h2>
+                    <h2>{item.Price.toLocaleString('ru-RU')} ₽</h2>
                     <div className='ProductCardButtons'>
                         <button onClick={(e) => {e.preventDefault()}}>
                             <img src={require('../images/add-to-cart.png')} />
@@ -78,7 +79,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
         const handleScroll = () => {
             if (element) {
                 setIsAtStart(element.scrollLeft === 0);
-                setIsAtEnd(element.scrollLeft + element.clientWidth >= element.scrollWidth - 1);
+                setIsAtEnd(element.scrollLeft + element.clientWidth >= element.scrollWidth - 10);
             }
         };
 
@@ -92,7 +93,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
     }, [activeTab, tabRefs]);
         
     return (
-        <div className='ProductShowcaseComponent'>
+        <div className="ProductShowcaseComponent">
             <div className='TabLabel'>
                 {tabs.map((tab, index) => (
                     <button key={index} onClick={() => setActiveTab(index)} className={activeTab === index ? 'ActiveTab' : 'InactiveTab'}>
@@ -104,7 +105,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
             <button className='leftBtn' onClick={() => {
                 if (tabRefs[activeTab].current) {
                     tabRefs[activeTab].current!.scrollTo({
-                        left: tabRefs[activeTab].current!.scrollLeft - 500,
+                        left: tabRefs[activeTab].current!.scrollLeft - 550,
                         behavior: 'smooth'
                     });
                 }
@@ -112,8 +113,8 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
             )}
             {tabs.map((tab, index) => (
                 <div key={index} style={{ display: activeTab === index ? 'block' : 'none' }}>
-                    <Tab ref={tabRefs[index]} data={tab.data} label={tab.label} />
-                    <Link to={'/More'}>
+                    <Tab ref={tabRefs[index]} data={tab.data} label={tab.label} url={tab.url} />
+                    <Link to={`${tab.url}`}>
                         <button>
                             Больше товаров данной категории
                         </button>
@@ -124,7 +125,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
                 <button className='rightBtn' onClick={() => {
                     if (tabRefs[activeTab].current) {
                         tabRefs[activeTab].current!.scrollTo({
-                            left: tabRefs[activeTab].current!.scrollLeft + 500,
+                            left: tabRefs[activeTab].current!.scrollLeft + 550,
                             behavior: 'smooth'
                         });
                     }

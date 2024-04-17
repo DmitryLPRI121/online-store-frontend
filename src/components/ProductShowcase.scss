@@ -2,6 +2,10 @@
     position: relative;
 
     .TabLabel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4em;
 
         > button {
             border-top: none;
@@ -9,16 +13,13 @@
             border-right: none;
             border-bottom: 0.25em solid transparent;
             border-radius: 0.1em;
-            padding: 0.2em 0.4em;
+            padding: 0.4em;
             font-size: 1.4em;
             background-color: rgba(#2c4050, 0.2);
             transition: all 0.1s ease-in-out;
         }
-        > button:not(:first-of-type) {
-            margin-left: 0.5em;
-        }
         .ActiveTab {
-            font-weight: bold;
+            text-shadow: -0.01em 0 black, 0 0.01em black, 0.01em 0 black, 0 -0.01em black;
             border-bottom: 0.25em solid #2c4050;
         }
         .InactiveTab:hover {
@@ -28,7 +29,7 @@
     }
 
     > button {
-        top: 50%;
+        top: 52%;
         transform: translateY(-50%);
         width: 4em;
         height: 4em;
@@ -38,6 +39,8 @@
         border-radius: 0.5em;
         background-color: rgba(#2c4050, 1);
         opacity: 0.8;
+        transition: all 25ms ease-in-out;
+        z-index: 10;
     }
     > .leftBtn {
         left: -1em;
@@ -50,6 +53,8 @@
     }
 
     .TabContent {
+        position: relative;
+        border-radius: 1.5em;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -69,7 +74,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;          
-                width: 14em;
+                width: 13.5em;
                 margin: 0.5em 0;
                 color: black;
                 padding: 0.5em;
@@ -83,6 +88,7 @@
                 }
 
                 > h3 {
+                    font-size: 1.1em;
                     margin: 0.2em 0;
                 }
 
@@ -112,7 +118,7 @@
                 }
 
                 > h2 {
-                    font-size: 1.8em;
+                    font-size: 1.6em;
                     margin: 0;
                     padding: 0.25em 0.5em 0.5em 0;
                     text-align: end;
