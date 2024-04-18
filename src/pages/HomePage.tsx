@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "../components/Navbar";
 import "./HomePage.scss"
 import Tabs from "../components/ProductShowcase";
+import { Footer } from "../components/Footer";
 
 interface IProducts {
     id: number;
@@ -178,6 +179,7 @@ const HomePage = () => {
                     { data: webcamsData, label: 'Веб-камеры', url: '/Products/Webcams' },
                 ]}/>
                 <hr />
+                <Footer />
             </main>
         </>
     )
