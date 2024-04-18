@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="Label">
                 <Link to="/Home">
                     <div className="Logo">
-                        <img src={require('../images/logo.png')} />
+                        <img src={require('../images/logo.png')} alt="Site Logo" />
                         <label>Online Store</label>
                     </div>
                 </Link>
@@ -70,10 +70,10 @@ const Footer = () => {
                     <h2>Мы в соцсетях</h2>
                     <div className="Links">
                         <Link to="">
-                            <img src={require('../images/vk.png')} style={{width: '4.5em'}} />
+                            <img src={require('../images/vk.png')} alt="Vk icon" style={{width: '4.5em'}} />
                         </Link>
                         <Link to="">
-                            <img src={require('../images/tg.png')} style={{width: '4em'}} />
+                            <img src={require('../images/tg.png')} alt="Telegram Icon" style={{width: '4em'}} />
                         </Link>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./ProductShowcase.scss"
 
@@ -41,7 +41,7 @@ const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
                     <h3>{item.Title}</h3>
                     <div className='RatingReviews'>
                         <div>
-                            <img src={require('../images/ReviewStar.png')} />
+                            <img src={require('../images/ReviewStar.png')} alt="Review Star Icon" />
                             <p>{item.Rating}</p>
                         </div>
                         <p>{item.Reviews} {getReviewWord(item.Reviews)}</p>
@@ -49,10 +49,10 @@ const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
                     <h2>{item.Price.toLocaleString('ru-RU')} ₽</h2>
                     <div className='ProductCardButtons'>
                         <button onClick={(e) => {e.preventDefault()}}>
-                            <img src={require('../images/add-to-cart.png')} />
+                            <img src={require('../images/add-to-cart.png')} alt="Add to card Icon" />
                         </button>
                         <button onClick={(e) => {e.preventDefault()}}>
-                            <img src={require('../images/BookmarkOff.png')} />
+                            <img src={require('../images/BookmarkOff.png')} alt="Bookmark Icon" />
                         </button>
                     </div>
                 </div>
@@ -69,6 +69,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
         if (tabRefs[activeTab].current) {
             tabRefs[activeTab].current!.scrollLeft = 0;
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeTab]);
 
     const [isAtStart, setIsAtStart] = useState(true);
