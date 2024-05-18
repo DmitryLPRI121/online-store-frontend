@@ -41,8 +41,8 @@ const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
                     <h3>{item.Title}</h3>
                     <div className='RatingReviews'>
                         <div>
-                            <img src={require('../images/ReviewStar.png')} alt="Review Star Icon" />
                             <p>{item.Rating}</p>
+                            <img src={require('../images/ReviewStar.png')} alt="Review Star Icon" />
                         </div>
                         <p>{item.Reviews} {getReviewWord(item.Reviews)}</p>
                     </div>

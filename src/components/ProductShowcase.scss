@@ -111,11 +111,9 @@
                             > img {
                                 width: 1em;
                                 height: 1em;
+                                margin-left: 0.5em;
+                                transform: translateY(-0.1em);
                                 filter: invert(19%) sepia(67%) saturate(313%) hue-rotate(164deg) brightness(93%) contrast(87%);
-                            }
-    
-                            > p {
-                                margin-left: 0.25em;
                             }
                         }
                     }
