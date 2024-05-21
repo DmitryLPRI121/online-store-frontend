@@ -7,7 +7,7 @@ const NotFoundPage = () => {
         <>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Page Not Found | Online Store</title>
+                <title>Страница не найдена | Online Store</title>
             </Helmet>
             <Navbar />
             <main className="NOT_FOUND_PAGE">

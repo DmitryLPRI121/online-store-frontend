@@ -138,7 +138,7 @@ const HomePage = () => {
         <>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Home | Online Store</title>
+                <title>Главная | Online Store</title>
             </Helmet>
             <Navbar />
             <main className="HOME_PAGE">
@@ -148,28 +148,28 @@ const HomePage = () => {
                 <hr />
                 <h2>Комплектующие для ПК</h2>
                 <Tabs tabs={[
-                    { data: processorsData, label: 'Процессоры', url: '/Products/Processors' },
-                    { data: graphicsCardsData, label: 'Видеокарты', url: '/Products/GraphicsCards' },
-                    { data: ramData, label: 'Оперативная память', url: '/Products/RAM' },
-                    { data: motherboardsData, label: 'Материнские платы', url: '/Products/Motherboards' },
-                    { data: ssdData, label: 'Твердотельные диски', url: '/Products/SSD' },
-                    { data: hddData, label: 'Жесткие диски', url: '/Products/HDD' },
-                    { data: psuData, label: 'Блоки питания', url: '/Products/PSU' },
-                    { data: coolersData, label: 'Кулеры', url: '/Products/Coolers' },                    
+                    { data: processorsData, label: 'Процессоры', url: 'Processors' },
+                    { data: graphicsCardsData, label: 'Видеокарты', url: 'GraphicsCards' },
+                    { data: ramData, label: 'Оперативная память', url: 'RAM' },
+                    { data: motherboardsData, label: 'Материнские платы', url: 'Motherboards' },
+                    { data: ssdData, label: 'Твердотельные накопители', url: 'SSD' },
+                    { data: hddData, label: 'Жесткие диски', url: 'HDD' },
+                    { data: psuData, label: 'Блоки питания', url: 'PSU' },
+                    { data: coolersData, label: 'Кулеры', url: 'Coolers' },                    
                 ]}/>
                 <hr />
                 <h2>Переносные гаджеты</h2>
                 <Tabs tabs={[
-                    { data: laptopsData, label: 'Ноутбуки', url: '/Products/Laptops' },
-                    { data: tabletsData, label: 'Планшеты', url: '/Products/Tablets' },
-                    { data: smartWatchesData, label: 'Смарт-часы', url: '/Products/SmartWatches' },
+                    { data: laptopsData, label: 'Ноутбуки', url: 'Laptops' },
+                    { data: tabletsData, label: 'Планшеты', url: 'Tablets' },
+                    { data: smartWatchesData, label: 'Смарт-часы', url: 'SmartWatches' },
                 ]}/>
                 <hr />
                 <h2>Периферийные устройства</h2>
                 <Tabs tabs={[
-                    { data: headphonesData, label: 'Наушники', url: '/Products/Headphones' },
-                    { data: microphonesData, label: 'Микрофоны', url: '/Products/Microphones' },
-                    { data: webcamsData, label: 'Веб-камеры', url: '/Products/Webcams' },
+                    { data: headphonesData, label: 'Наушники', url: 'Headphones' },
+                    { data: microphonesData, label: 'Микрофоны', url: 'Microphones' },
+                    { data: webcamsData, label: 'Веб-камеры', url: 'Webcams' },
                 ]}/>
                 <hr />
                 <Footer />

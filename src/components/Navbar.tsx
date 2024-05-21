@@ -10,6 +10,12 @@ const Navbar = () => {
                     <label>Online Store</label>
                 </div>
             </Link>
+            <Link to='/Catalog'>
+                <div className="Catalog">
+                    <img src={require('../images/catalog.png')} />
+                    <label>Каталог</label>
+                </div>
+            </Link>
             <div className="SearchBar">
                 <input type="text" />
             </div>

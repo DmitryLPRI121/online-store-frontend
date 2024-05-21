@@ -35,7 +35,7 @@ function getReviewWord(reviews: number) {
 const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
     <div ref={ref} className='TabContent'>
         {data.map((item) => (
-            <Link to={`${url}/${item.id}`} key={item.id}>
+            <Link to={`/Catalog/${url}/${item.id}`} key={item.id}>
                 <div className='ProductCard'>
                     <img src='https://c.dns-shop.ru/thumb/st4/fit/500/500/0bab69bd071c5b93d6554558e81f9da6/d212b8b4d0f4fc5727cceb252eec43e085375d95ec5af2d541464a7af06f3bad.jpg.webp' alt={item.Title} />
                     <h3>{item.Title}</h3>
@@ -127,7 +127,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
                             }}>&gt;</button>
                         )}
                     </div>
-                    <Link to={`${tab.url}`}>
+                    <Link to={`/Catalog/${tab.url}`}>
                         <button>
                             Больше товаров данной категории
                         </button>
