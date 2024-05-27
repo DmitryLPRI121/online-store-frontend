@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss"
 
 const Navbar = () => {
+    const isLoggedIn = localStorage.getItem('login') === 'true';
     return (
         <div className="NAVBAR">
             <Link to='/Home'>
@@ -19,7 +20,7 @@ const Navbar = () => {
             <div className="SearchBar">
                 <input type="text" />
             </div>
-            <Link to='/Account'>
+            <Link to={isLoggedIn ? '/Account' : '/LoginPage'}>
                 <div className="Account">
                     <img src={require('../images/AccountIcon.png')} />
                 </div>
