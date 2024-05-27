@@ -28,6 +28,15 @@ import {
   ColumnDef,
   flexRender,
 } from '@tanstack/react-table';
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Dialog,
+  DialogFooter
+} from "./ui/dialog";
 
 interface Attribute {
   attribute: {
@@ -98,9 +107,133 @@ export default function DataTable({ dataType }: DataTableProps) {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const [newProduct, setNewProduct] = useState({
+    id: '',
+    title: '',
+    description: '',
+    imageUrl: '',
+    quantity: '',
+    price: '',
+  });
+   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setNewProduct((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        'http://localhost:8080/Products',
+        {
+          ...newProduct,
+          id: parseInt(newProduct.id),
+          quantity: parseInt(newProduct.quantity),
+          price: parseFloat(newProduct.price),
+        },
+        { withCredentials: true }
+      );
+      // После успешного добавления продукта, обновляем список продуктов
+      const response = await axios.get<ProductsResponse>(
+        'http://localhost:8080/Products?page=1&pageSize=200&minPrice=1&maxPrice=300000',
+        { withCredentials: true }
+      );
+      setProducts(response.data.data);
+    } catch (error) {
+      console.error('Ошибка при добавлении продукта:', error);
+    }
+  };
+
   switch (dataType) {
     case 'products':
       return (
+        <>
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-lg font-semibold">{dataType}</h1>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Добавить продукт</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Добавить продукт</DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit}>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="id" className="text-right">
+                        Id
+                      </Label>
+                      <Input
+                        id="id"
+                        value={newProduct.id}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="title" className="text-right">
+                        Title
+                      </Label>
+                      <Input
+                        id="title"
+                        value={newProduct.title}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="description" className="text-right">
+                        Description
+                      </Label>
+                      <Input
+                        id="description"
+                        value={newProduct.description}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="imageUrl" className="text-right">
+                        Image URL
+                      </Label>
+                      <Input
+                        id="imageUrl"
+                        value={newProduct.imageUrl}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="quantity" className="text-right">
+                        Quantity
+                      </Label>
+                      <Input
+                        id="quantity"
+                        value={newProduct.quantity}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="price" className="text-right">
+                        Price
+                      </Label>
+                      <Input
+                        id="price"
+                        value={newProduct.price}
+                        onChange={handleInputChange}
+                        className="col-span-3"
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit">Сохранить</Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
         <Table>
           <TableCaption>{dataType}</TableCaption>
           <TableHeader>
@@ -207,6 +340,7 @@ export default function DataTable({ dataType }: DataTableProps) {
             </Button>
           </div>
         </Table>
+          </>
       );
 
     default:

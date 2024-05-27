@@ -350,7 +350,7 @@ export default function AccountPage() {
               <h2 className="text-4xl font-semibold pb-10">Настройки:</h2>
               <div>
                 <div className="flex flex-col gap-5">
-                <Dialog>
+              <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline">Сменить пароль</Button>
               </DialogTrigger>
