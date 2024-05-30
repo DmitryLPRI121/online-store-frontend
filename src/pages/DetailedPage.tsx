@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "../components/Navbar";
-import "./DetailedPage.scss"
+import "./DetailedPage.scss";
 import { Footer } from "../components/Footer";
 import noImage from '../images/no-image.svg';
 import { useEffect, useState } from "react";
@@ -112,7 +112,7 @@ const DetailedPage = () => {
                 <Footer />
             </main>
         </>
-    )
+    );
 }
 
 export { DetailedPage };
