@@ -5,16 +5,16 @@ import { Footer } from "../components/Footer";
 import { useState } from "react";
 import { IProduct } from "../ProductInterface";
 
-const graphicsCardsData: IProduct[] = [
-    { id: 1, Title: 'NVIDIA GeForce RTX 3090', Rating: 4.9, Reviews: 180, Price: 140000 },
-    { id: 2, Title: 'AMD Radeon RX 6900 XT', Rating: 4.8, Reviews: 160, Price: 110000 },
-    { id: 3, Title: 'NVIDIA GeForce RTX 3080', Rating: 4.8, Reviews: 200, Price: 90000 },
-    { id: 4, Title: 'AMD Radeon RX 6800 XT', Rating: 4.7, Reviews: 150, Price: 80000 },
-    { id: 5, Title: 'NVIDIA GeForce RTX 3070', Rating: 4.7, Reviews: 160, Price: 60000 },
-    { id: 6, Title: 'AMD Radeon RX 6700 XT', Rating: 4.6, Reviews: 140, Price: 50000 },
-    { id: 7, Title: 'NVIDIA GeForce RTX 3060 Ti', Rating: 4.6, Reviews: 150, Price: 40000 },
-    { id: 8, Title: 'AMD Radeon RX 6600 XT', Rating: 4.5, Reviews: 130, Price: 35000 },
-];
+// const graphicsCardsData: IProduct[] = [
+//     { id: 1, Title: 'NVIDIA GeForce RTX 3090', Rating: 4.9, Reviews: 180, Price: 140000 },
+//     { id: 2, Title: 'AMD Radeon RX 6900 XT', Rating: 4.8, Reviews: 160, Price: 110000 },
+//     { id: 3, Title: 'NVIDIA GeForce RTX 3080', Rating: 4.8, Reviews: 200, Price: 90000 },
+//     { id: 4, Title: 'AMD Radeon RX 6800 XT', Rating: 4.7, Reviews: 150, Price: 80000 },
+//     { id: 5, Title: 'NVIDIA GeForce RTX 3070', Rating: 4.7, Reviews: 160, Price: 60000 },
+//     { id: 6, Title: 'AMD Radeon RX 6700 XT', Rating: 4.6, Reviews: 140, Price: 50000 },
+//     { id: 7, Title: 'NVIDIA GeForce RTX 3060 Ti', Rating: 4.6, Reviews: 150, Price: 40000 },
+//     { id: 8, Title: 'AMD Radeon RX 6600 XT', Rating: 4.5, Reviews: 130, Price: 35000 },
+// ];
 
 
 const CategoryPage = () => {
@@ -52,7 +52,7 @@ const CategoryPage = () => {
                         <div className="CategorySearch">
                             <input />
                         </div>
-                        <div className="ProductList">
+                        {/* <div className="ProductList">
                             {graphicsCardsData.map((product) => {
                                 return (
                                     <div className="ProductCard">
@@ -63,7 +63,7 @@ const CategoryPage = () => {
                                         </div>
                                     </div>
                             )})}
-                        </div>
+                        </div> */}
                         <div className="Pagination">
 
                         </div>

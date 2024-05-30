@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./ProductShowcase.scss"
+import { IProduct } from '../ProductInterface';
+import noImage from '../images/no-image.svg';
 
-interface IProducts {
-    id: number;
-    Title: string;
-    Rating: number;
-    Reviews: number;
-    Price: number;
-}
 
 interface TabProps {
-    data: IProducts[];
+    data: IProduct[];
     label: string;
     url: string;
 }
@@ -20,46 +15,78 @@ interface TabsProps {
     tabs: TabProps[];
 }
 
-function getReviewWord(reviews: number) {
-    let text;
-    if (reviews === 1) {
-        text = 'отзыв';
-    } else if (reviews > 1 && reviews < 5) {
-        text = 'отзыва';
-    } else {
-        text = 'отзывов';
-    }
-    return text;
-}
 
 const Tab = React.forwardRef<HTMLDivElement, TabProps>(({ data, url }, ref) => (
     <div ref={ref} className='TabContent'>
         {data.map((item) => (
             <Link to={`/Catalog/${url}/${item.id}`} key={item.id}>
                 <div className='ProductCard'>
-                    <img src='https://c.dns-shop.ru/thumb/st4/fit/500/500/0bab69bd071c5b93d6554558e81f9da6/d212b8b4d0f4fc5727cceb252eec43e085375d95ec5af2d541464a7af06f3bad.jpg.webp' alt={item.Title} />
-                    <h3>{item.Title}</h3>
+                    <div className='cardImage'>
+                        <ImageWithFallback src={item.imageUrl ?? noImage} alt={item.title} noImage={noImage} />
+                    </div>
+                    <h3>{item.title}</h3>
                     <div className='RatingReviews'>
                         <div>
-                            <p>{item.Rating}</p>
+                            <p>{item.rating}</p>
                             <img src={require('../images/ReviewStar.png')} alt="Review Star Icon" />
                         </div>
-                        <p>{item.Reviews} {getReviewWord(item.Reviews)}</p>
                     </div>
-                    <h2>{item.Price.toLocaleString('ru-RU')} ₽</h2>
-                    <div className='ProductCardButtons'>
-                        <button onClick={(e) => {e.preventDefault()}}>
-                            <img src={require('../images/add-to-cart.png')} alt="Add to card Icon" />
-                        </button>
-                        <button onClick={(e) => {e.preventDefault()}}>
-                            <img src={require('../images/BookmarkOff.png')} alt="Bookmark Icon" />
-                        </button>
-                    </div>
+                    <h2>{item.price.toLocaleString('ru-RU')} ₽</h2>
+                    <button onClick={(e) => {e.preventDefault()}}>
+                        <img src={require('../images/add-to-cart.png')} alt="Add to card Icon" />
+                    </button>
                 </div>
             </Link>
         ))}
     </div>
 ));
+
+interface ImageWithFallbackProps {
+    src: string;
+    alt: string;
+    noImage: string;
+}
+
+const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({ src, alt, noImage }) => {
+    const [currentSrc, setCurrentSrc] = useState(noImage);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const image = new Image();
+        let timer: NodeJS.Timeout;
+
+        const handleLoad = () => {
+            clearTimeout(timer);
+            setLoading(false);
+            setCurrentSrc(src);
+        };
+
+        const handleError = () => {
+            clearTimeout(timer);
+            setLoading(false);
+            setCurrentSrc(noImage);
+        };
+
+        timer = setTimeout(() => {
+            if (loading) {
+                handleError();
+            }
+        }, 2000);
+
+        image.src = src;
+        image.onload = handleLoad;
+        image.onerror = handleError;
+
+        return () => {
+            clearTimeout(timer);
+            image.onload = null;
+            image.onerror = null;
+        };
+    }, [src, noImage, loading]);
+
+    return <img src={currentSrc} alt={alt} />;
+};
+
 
 const Tabs: React.FC<TabsProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = useState(0);
@@ -95,13 +122,15 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
         
     return (
         <div className="ProductShowcaseComponent">
-            <div className='TabLabel'>
-                {tabs.map((tab, index) => (
-                    <button key={index} onClick={() => setActiveTab(index)} className={activeTab === index ? 'ActiveTab' : 'InactiveTab'}>
-                        {tab.label}
-                    </button>
-                ))}
-            </div>
+            {tabs.length > 1 && (
+                <div className='TabLabel'>
+                    {tabs.map((tab, index) => (
+                        <button key={index} onClick={() => setActiveTab(index)} className={activeTab === index ? 'ActiveTab' : 'InactiveTab'}>
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
+            )}
             {tabs.map((tab, index) => (
                 <div key={index} style={{ display: activeTab === index ? 'block' : 'none' }}>
                     <div className={`TapeField ${isAtStart ? 'at-start' : ''} ${isAtEnd ? 'at-end' : ''}`}>
