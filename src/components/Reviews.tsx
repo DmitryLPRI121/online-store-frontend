@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./
 
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
-  AlertDialogContent, AlertDialogFooter,
+  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger
@@ -78,7 +78,6 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
     setTextValue(event.target.value);
   };
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -93,6 +92,7 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
 
     fetchUserData();
   }, []);
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -108,7 +108,7 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
 
     fetchReviews();
   }, [productId]);
-  console.log(comments)
+
   const fetchComments = async (reviewId: number) => {
     try {
       const response = await axios.get(`http://localhost:8080/Comments/byFeedback/${reviewId}?page=1&pageSize=1000&sortField=createdAt&sortOrder=desc`, {
@@ -136,6 +136,7 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
       console.error('Error fetching sub-comments:', error);
     }
   };
+
   const [rating, setRating] = useState(0); // Исходное значение оценки
 
   // Функция для установки оценки при щелчке на звезде
@@ -155,13 +156,14 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
       const response = await axios.post(`http://localhost:8080/Feedbacks`, reviewData, {
         withCredentials: true
       });
-      setTextValue('')
+      setTextValue('');
       setRating(0);
       toast('Отзыв успешно отправлен');
     } catch (error) {
       console.error('Error submitting review:', error);
     }
   };
+
   const submitComment = async (reviewId: number) => {
     try {
       const reviewData = {
@@ -174,13 +176,14 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
       const response = await axios.post(`http://localhost:8080/Comments`, reviewData, {
         withCredentials: true
       });
-      setTextValue('')
+      setTextValue('');
       setRating(0);
       toast('Комментарий успешно отправлен');
     } catch (error) {
       console.error('Error submitting review:', error);
     }
   };
+
   const submitSubComment = async (reviewId: number, parentId: number) => {
     try {
       const reviewData = {
@@ -194,13 +197,41 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
       const response = await axios.post(`http://localhost:8080/Comments`, reviewData, {
         withCredentials: true
       });
-      setTextValue('')
+      setTextValue('');
       setRating(0);
       toast('Комментарий успешно отправлен');
     } catch (error) {
       console.error('Error submitting review:', error);
     }
   };
+
+  const handleDeleteComment = async (commentId: number, parentId?: number) => {
+    try {
+      await axios.delete(`http://localhost:8080/Comments/${commentId}`, {
+        withCredentials: true,
+      });
+      toast("Комментарий успешно удален");
+
+      if (parentId) {
+        setSubComments((prevSubComments) => ({
+          ...prevSubComments,
+          [parentId]: prevSubComments[parentId].filter((comment) => comment.id !== commentId),
+        }));
+      } else {
+        setComments((prevComments) => {
+          const updatedComments = { ...prevComments };
+          Object.keys(updatedComments).forEach((reviewId) => {
+            // @ts-ignore
+            updatedComments[reviewId] = updatedComments[reviewId].filter((comment) => comment.id !== commentId);
+          });
+          return updatedComments;
+        });
+      }
+    } catch (error) {
+      console.error("Ошибка при удалении комментария:", error);
+    }
+  };
+
   return (
     <div className="bg-white pt-10">
       <div>
@@ -288,8 +319,11 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
                                         dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString()}</time>
                                   </p>
                                   <p className="mt-1">{comment.text}</p>
+
                                   <Accordion type="single" collapsible>
                                     <AccordionItem value={`sub-item-${comment.id}`}>
+                                      <div className='flex justify-between'>
+
                                       <AlertDialog>
                                       <AlertDialogTrigger>
                                       <Button className='m-5 ml-0' variant={"outline"}>Ответить</Button>
@@ -305,6 +339,24 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
                                           </AlertDialogFooter>
                                         </AlertDialogContent>
                                       </AlertDialog>
+                                        {userData?.userName === 'Admin' && (
+                                            <AlertDialog>
+                                            <AlertDialogTrigger>
+                                              <Button >Удалить комментарий</Button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                              <AlertDialogHeader>
+                                                <AlertDialogTitle>Вы уверены, что хотите удалить комментарий?</AlertDialogTitle>
+                                              </AlertDialogHeader>
+                                              <AlertDialogFooter>
+                                                <AlertDialogCancel>Отмена</AlertDialogCancel>
+                                                <AlertDialogAction onClick={()=>handleDeleteComment(comment.id)}>Продолжить</AlertDialogAction>
+                                              </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                          </AlertDialog>
+
+                                      )}
+                                        </div>
                                       {comment?.haveComments? (
                                           <>
                                           <AccordionTrigger
@@ -313,7 +365,7 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
                                         {subComments[comment.id] ? (
                                             subComments[comment.id].map((subComment) => (
                                                 <div key={subComment.id}
-                                                     className="flex space-x-4 text-sm text-gray-500 pl-6">
+                                                     className="flex space-x-4 text-sm text-gray-500 pl-6 items-center">
                                                   <div className="flex-none py-2">
                                                     <img
                                                         src={subComment.user.avatar || 'https://via.placeholder.com/40'}
@@ -327,6 +379,23 @@ const Reviews: React.FC<ReviewsProps> = ({ productId }) => {
                                                     </p>
                                                     <p className="mt-1">{subComment.text}</p>
                                                   </div>
+                                                  {userData?.userName === 'Admin' && (
+                                                      <AlertDialog>
+                                                      <AlertDialogTrigger>
+                                                        <Button >Удалить комментарий</Button>
+                                                      </AlertDialogTrigger>
+                                                      <AlertDialogContent>
+                                                        <AlertDialogHeader>
+                                                          <AlertDialogTitle>Вы уверены, что хотите удалить комментарий?</AlertDialogTitle>
+
+                                                        </AlertDialogHeader>
+                                                        <AlertDialogFooter>
+                                                          <AlertDialogCancel>Отмена</AlertDialogCancel>
+                                                          <AlertDialogAction onClick={()=>handleDeleteComment(subComment.id)}>Продолжить</AlertDialogAction>
+                                                        </AlertDialogFooter>
+                                                      </AlertDialogContent>
+                                                    </AlertDialog>
+                                            )}
                                                 </div>
                                             ))
                                         ) : (
