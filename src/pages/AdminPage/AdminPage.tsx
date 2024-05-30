@@ -1,7 +1,11 @@
 
 import React from "react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "../../components/ui/tabs";
-import DataTable from "../../components/DataTable";
+import PanelProducts from "../../components/AdminPanel/panelProducts";
+import PanelOrders from "../../components/AdminPanel/panelOrders";
+import PanelFeedbacks from "../../components/AdminPanel/panelFeedbacks";
+import PanelComments from "../../components/AdminPanel/panelComments";
+import Logs from "../../components/AdminPanel/Logs";
 
 export default function AdminPage() {
   return (
@@ -14,19 +18,19 @@ export default function AdminPage() {
         <TabsTrigger value="logs">Logs</TabsTrigger>
       </TabsList>
       <TabsContent value="products">
-        <DataTable dataType="products" />
+          <PanelProducts/>
       </TabsContent>
       <TabsContent value="feedbacks">
-        {/*<DataTable dataType="categories" />*/}
+          <PanelFeedbacks/>
       </TabsContent>
       <TabsContent value="orders">
-        {/*<DataTable dataType="orders" />*/}
+          <PanelOrders/>
       </TabsContent>
       <TabsContent value="comments">
-        {/*<DataTable dataType="orders" />*/}
+          <PanelComments/>
       </TabsContent>
       <TabsContent value="logs">
-        {/*<DataTable dataType="orders" />*/}
+          <Logs/>
       </TabsContent>
 
     </Tabs>

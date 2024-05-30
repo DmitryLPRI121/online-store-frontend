@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "../components/Navbar";
-import "./DetailedPage.scss"
+import "./DetailedPage.scss";
 import { Footer } from "../components/Footer";
 import { IProduct } from "../ProductInterface";
 import noImage from '../images/no-image.svg';
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import Reviews from "../components/Reviews";
 
 const graphicsCardsData: IProduct = {
     id: 1,
@@ -30,9 +32,9 @@ const graphicsCardsData: IProduct = {
 };
 
 const DetailedPage = () => {
-
     const [currentImage, setCurrentImage] = useState(graphicsCardsData.CoverUmageUrl);
     const images = [graphicsCardsData.CoverUmageUrl, ...(graphicsCardsData.GalleryImagesUrl || [])];
+    const { id } = useParams<{ id: string }>();
 
     return (
         <>
@@ -94,23 +96,17 @@ const DetailedPage = () => {
                 <h2>Характеристики {graphicsCardsData.Title}</h2>
                 <div className="ProductFeatures">
                     {graphicsCardsData.Attributes && Object.entries(graphicsCardsData.Attributes).map(([attribute, value]) => (
-                        <>
-                            <div key={attribute}>
-                                <h3>{attribute}</h3>
-                                <p>{value}</p>
-                            </div>
+                        <div key={attribute}>
+                            <h3>{attribute}</h3>
+                            <p>{value}</p>
                             <hr />
-                        </>
+                        </div>
                     ))}
                 </div>
-                <h2>Отзывы</h2>
-                <div className="Reviews">
-                    {/* Блок отзывов о товаре */}
-                </div>
-                <Footer />
+                <Reviews productId={id!} />
             </main>
         </>
-    )
+    );
 }
 
 export { DetailedPage };

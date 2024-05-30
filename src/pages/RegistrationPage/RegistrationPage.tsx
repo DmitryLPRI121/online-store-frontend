@@ -35,7 +35,7 @@ export default function LoginPage() {
       url.searchParams.append('Email', data.email);
       url.searchParams.append('password', data.password);
       url.searchParams.append('PhoneNumber', data.phoneNumber);
-      url.searchParams.append('BirthDate', currentDate);
+      url.searchParams.append('BirthDate', "2024-05-17T14:08:38.486351Z");
 
       const response = await axios.post(url.toString(),null, { withCredentials: true });
 
