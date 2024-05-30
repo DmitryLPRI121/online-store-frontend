@@ -1,7 +1,35 @@
 import { Link } from "react-router-dom";
 import "./Navbar.scss"
+import { useEffect, useState } from "react";
+import { IProduct } from "../ProductInterface";
+import ProductService from "../backend/service/ProductService";
 
 const Navbar = () => {
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const [searchResult, setSearchResult] = useState<IProduct[]>([]);
+
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleBlur = () => {
+        setTimeout(() => {
+            setIsFocused(false);
+        }, 100);
+    };
+
+    useEffect(() => {
+        if (searchQuery) {
+            ProductService.getProductsBySearch(searchQuery)
+            .then(result => setSearchResult(result))
+            .catch(error => console.error(error));
+        }
+    }, [searchQuery]);
+
     return (
         <div className="NAVBAR">
             <Link to='/Home'>
@@ -17,7 +45,23 @@ const Navbar = () => {
                 </div>
             </Link>
             <div className="SearchBar">
-                <input type="text" />
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    placeholder="Поиск"
+                />
+                <div className="SearchResult" style={{ display: isFocused ? 'block' : 'none' }}>
+                    {searchResult.slice(0, 15).map((product) => {
+                        return (
+                            <Link to={`/Catalog/${product.categoryId}/${product.id}`} key={product.id}>
+                                <p>{product.title}</p>
+                            </Link>
+                        )
+                    })}
+                </div>
             </div>
             <Link to='/Account'>
                 <div className="Account">

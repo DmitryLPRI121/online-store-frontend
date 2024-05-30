@@ -8,5 +8,7 @@ export interface IProduct {
     price: number;
     attributes?: { [key: string]: string };
     imageUrl?: string;
+    subcategoryTitle?: string;
     galleryImagesUrl?: string[];
+    categoryId?: number;
 }

@@ -54,17 +54,42 @@ const ProductService = {
             });     
         return result;
     },
-    getProductsByCategory: async (id: number | undefined) => {
+    getProductsByCategory: async (id: number | undefined, page: number = 1, pageSize: number = 10, minPrice: number = 1, maxPrice: number = 300000) => {
         let result: any[] = [];
         const headers = {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': '69420'
         };
-        await axios.get(`https://674f-85-143-92-50.ngrok-free.app/Products/byCategory?categoryId=${id}`, {headers, timeout: 5000})
+        await axios.get(`https://674f-85-143-92-50.ngrok-free.app/Products/byCategory?categoryId=${id}&page=${page}&pageSize=${pageSize}&minPrice=${minPrice}&maxPrice=${maxPrice}`, {headers, timeout: 5000})
             .then((res) => {
                 if (res.data) {
                     result = res.data.data || [];
-                    console.log(result);
+                    // console.log(result);
+                }
+                // console.log(result);
+                // console.log(res.data)
+                // console.log(res.data.accessToken)
+            }).catch(error => {
+                console.log(error)
+            }).finally( () => {
+                // store.dispatch({
+                //     type: 'DATA_LOADING_STATE',
+                //     payload: false
+                // })
+            });     
+        return result;
+    },
+    getProductsBySubcategory: async (id: number | undefined, page: number = 1, pageSize: number = 10, minPrice: number = 1, maxPrice: number = 300000) => {
+        let result: any[] = [];
+        const headers = {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420'
+        };
+        await axios.get(`https://674f-85-143-92-50.ngrok-free.app/Products/bySubategory?subcategoryId=${id}&page=${page}&pageSize=${pageSize}&minPrice=${minPrice}&maxPrice=${maxPrice}`, {headers, timeout: 5000})
+            .then((res) => {
+                if (res.data) {
+                    result = res.data.data || [];
+                    // console.log(result);
                 }
                 // console.log(result);
                 // console.log(res.data)
@@ -90,6 +115,31 @@ const ProductService = {
                 if (res.data) {
                     result = res.data || [];
                     console.log(result);
+                }
+                // console.log(result);
+                // console.log(res.data)
+                // console.log(res.data.accessToken)
+            }).catch(error => {
+                console.log(error)
+            }).finally( () => {
+                // store.dispatch({
+                //     type: 'DATA_LOADING_STATE',
+                //     payload: false
+                // })
+            });     
+        return result;
+    },
+    getProductsBySearch: async (text: string | undefined) => {
+        let result: any[] = [];
+        const headers = {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420'
+        };
+        await axios.get(`https://674f-85-143-92-50.ngrok-free.app/Products/search?search=${text}&page=1&pageSize=1000`, {headers, timeout: 5000})
+            .then((res) => {
+                if (res.data) {
+                    result = res.data.data || [];
+                    // console.log(result);
                 }
                 // console.log(result);
                 // console.log(res.data)

@@ -77,8 +77,8 @@ const HomePage = () => {
                 <hr />
                 <h2>Настольные и переносные компьютеры</h2>
                 <Tabs tabs={[
-                    { data: desktopsProducts, label: 'Настольные компьютеры', url: 'Desktops' },
-                    { data: laptopsProducts, label: 'Ноутбуки', url: 'Laptops' },
+                    { data: desktopsProducts, label: 'Настольные компьютеры', url: '1' },
+                    { data: laptopsProducts, label: 'Ноутбуки', url: '2' },
                 ]}/>
                 <hr />
                 <Footer />
