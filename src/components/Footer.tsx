@@ -21,21 +21,13 @@ const Footer = () => {
             <div className="NavContent">
                 <div className="Section">
                     <h2>Общее</h2>
-                    <Link to="">Главная</Link>
-                    <Link to="">Новости</Link>
-                    <Link to="">Акции</Link>
-                    <Link to="">Отзывы</Link>
+                    <Link to="/Home">Главная</Link>
                 </div>
                 <div className="Section">
                     <h2>Каталог</h2>
-                    <Link to="">Новинки</Link>
-                    <Link to="">Акции</Link>
-                    <Link to="">Компьютеры</Link>
-                    <Link to="">Комплектующие для ПК</Link>
-                    <Link to="">Ноутбуки</Link>
-                    <Link to="">Планшеты</Link>
-                    <Link to="">Смартфоны</Link>
-                    <Link to="">Смарт-часы</Link>
+                    <Link to="/Catalog/Latest">Новинки</Link>
+                    <Link to="/Catalog/Desktops">Настольные компьютеры</Link>
+                    <Link to="/Catalog/Laptops">Ноутбуки</Link>
                 </div>
                 <div className="Section">
                     <h2>О компании</h2>
